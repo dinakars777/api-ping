@@ -1,0 +1,39 @@
+{
+  "name": "@dinakars777/api-ping",
+  "version": "1.0.0",
+  "description": "⚡️ A lightning-fast, beautiful CLI tool to hit API endpoints and format responses.",
+  "main": "dist/index.js",
+  "bin": {
+    "api-ping": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --clean",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "cli",
+    "api",
+    "ping",
+    "curl",
+    "fetch",
+    "rest",
+    "json",
+    "format"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "commander": "^12.0.0",
+    "node-fetch": "^2.7.0",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/node-fetch": "^2.6.11",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
