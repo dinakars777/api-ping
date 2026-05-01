@@ -1,13 +1,13 @@
 # api-ping ⚡️
 
-> A lightning-fast, beautiful CLI tool to hit API endpoints and format responses.
+> Fast CLI to hit API endpoints and format responses.
 
 [![npm version](https://img.shields.io/npm/v/@dinakars777/api-ping?color=CB3837&logo=npm)](https://www.npmjs.com/package/@dinakars777/api-ping)
 [![npm downloads](https://img.shields.io/npm/dm/@dinakars777/api-ping?color=CB3837&logo=npm)](https://www.npmjs.com/package/@dinakars777/api-ping)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js)](https://nodejs.org)
 
-Stop squinting at massive, uncolored JSON blobs from `curl`. `api-ping` hits your endpoint and prints a beautifully syntax-highlighted, indented response with timing and color-coded status badges — zero config, zero install.
+`api-ping` hits your endpoint and prints syntax-highlighted JSON with timing and status badges. Zero config.
 
 ---
 
@@ -43,10 +43,10 @@ npx @dinakars777/api-ping https://api.example.com/protected -H "Authorization: B
 
 ## Features
 
-- 🚀 zero-overhead networking via native Node.js fetch
-- 🎨 recursive JSON syntax highlighting via `picocolors`
-- ⏱️ high-resolution request timing (e.g. `24ms`)
-- 🚥 color-coded HTTP status badges (green 2xx, yellow 3xx, red 4xx/5xx)
+- 🚀 Native Node.js fetch
+- 🎨 JSON syntax highlighting via `picocolors`
+- ⏱️ Request timing (e.g. `24ms`)
+- 🚥 Color-coded HTTP status (green 2xx, yellow 3xx, red 4xx/5xx)
 
 ---
 
