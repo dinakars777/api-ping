@@ -29,7 +29,7 @@ export async function pingApi(
         const durationMs = Math.round(t1 - t0);
 
         const contentType = response.headers.get('content-type') || '';
-        const isJson = contentType.includes('application/json');
+        const isJson = isJsonContentType(contentType);
 
         let data;
         if (isJson) {
@@ -64,6 +64,12 @@ export async function pingApi(
             error: error.message,
         };
     }
+}
+
+export function isJsonContentType(contentType: string): boolean {
+    const mimeType = contentType.split(';', 1)[0].trim().toLowerCase();
+
+    return mimeType === 'application/json' || (mimeType.includes('/') && mimeType.endsWith('+json'));
 }
 
 /**
