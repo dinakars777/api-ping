@@ -34,16 +34,24 @@ export function displayResponse(res: PingResponse) {
 
     console.log(`\n  ${statusBadge} ${pc.bold(res.statusText)}  ⏱  ${timeBadge}\n`);
 
-    if (res.isJson && res.data) {
+    if (res.isJson && hasResponseBody(res)) {
         const formattedJson = highlightJson(res.data);
         console.log(formattedJson);
-    } else if (res.data) {
+    } else if (hasResponseBody(res)) {
+        const text = String(res.data);
         console.log(pc.gray('Response Text (Not JSON):'));
-        console.log(pc.white(res.data.substring(0, 1000) + (res.data.length > 1000 ? '...' : '')));
+        console.log(pc.white(text.substring(0, 1000) + (text.length > 1000 ? '...' : '')));
     } else {
         console.log(pc.gray('(Empty Response Body)'));
     }
 
     console.log();
     outro(pc.green('✔ Done'));
+}
+
+function hasResponseBody(res: PingResponse): boolean {
+    if (typeof res.data === 'undefined') return false;
+    if (res.isJson) return true;
+
+    return res.data !== null && res.data !== '';
 }

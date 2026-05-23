@@ -40,7 +40,7 @@ async function pingApi(url, method = "GET", headers = {}, body) {
     const t1 = performance.now();
     const durationMs = Math.round(t1 - t0);
     const contentType = response.headers.get("content-type") || "";
-    const isJson = contentType.includes("application/json");
+    const isJson = isJsonContentType(contentType);
     let data;
     if (isJson) {
       data = await response.json();
@@ -71,6 +71,10 @@ async function pingApi(url, method = "GET", headers = {}, body) {
       error: error.message
     };
   }
+}
+function isJsonContentType(contentType) {
+  const mimeType = contentType.split(";", 1)[0].trim().toLowerCase();
+  return mimeType === "application/json" || mimeType.includes("/") && mimeType.endsWith("+json");
 }
 function highlightJson(obj, indentLevel = 0) {
   const indent = "  ".repeat(indentLevel);
@@ -131,17 +135,23 @@ function displayResponse(res) {
   console.log(`
   ${statusBadge} ${import_picocolors2.default.bold(res.statusText)}  \u23F1  ${timeBadge}
 `);
-  if (res.isJson && res.data) {
+  if (res.isJson && hasResponseBody(res)) {
     const formattedJson = highlightJson(res.data);
     console.log(formattedJson);
-  } else if (res.data) {
+  } else if (hasResponseBody(res)) {
+    const text = String(res.data);
     console.log(import_picocolors2.default.gray("Response Text (Not JSON):"));
-    console.log(import_picocolors2.default.white(res.data.substring(0, 1e3) + (res.data.length > 1e3 ? "..." : "")));
+    console.log(import_picocolors2.default.white(text.substring(0, 1e3) + (text.length > 1e3 ? "..." : "")));
   } else {
     console.log(import_picocolors2.default.gray("(Empty Response Body)"));
   }
   console.log();
   (0, import_prompts.outro)(import_picocolors2.default.green("\u2714 Done"));
+}
+function hasResponseBody(res) {
+  if (typeof res.data === "undefined") return false;
+  if (res.isJson) return true;
+  return res.data !== null && res.data !== "";
 }
 
 // src/index.ts
